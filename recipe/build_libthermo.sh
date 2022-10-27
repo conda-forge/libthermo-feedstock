@@ -3,9 +3,9 @@ mkdir build
 cd build
 
 if [[ $build_platform == "osx-64" ]]; then
-    set TBB_SWITCH=OFF
+    export TBB_SWITCH=OFF
 else
-    set TBB_SWITCH=ON
+    export TBB_SWITCH=ON
 fi
 if [[ $PKG_NAME == "libthermo" ]]; then
     cmake .. ${CMAKE_ARGS}              \
