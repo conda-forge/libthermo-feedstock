@@ -1,5 +1,5 @@
 {% set name = "libthermo" %}
-{% set version = "0.1.1" %}
+{% set version = "0.1.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,18 +7,18 @@ package:
 
 source:
   url: https://github.com/twiinIT/libthermo/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 7c08b8c3a0190275cae6dc1605dbc5b681d176ab0066fb5b19d64630a0317861
+  sha256: cb5455a9ea78e21ffc4725d51e8aacce370df3958aacb0fb7b4b391913b428d3
   patches:
     - libthermo.patch
 
 build:
-  number: 3
+  number: 0
 
 outputs:
   - name: libthermo
     version: {{ version }}
-    script: build_libthermo.sh                       # [unix]
-    script: build_libthermo.bat                      # [win]
+    script: build_libthermo.sh  # [unix]
+    script: build_libthermo.bat  # [win]
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -43,8 +43,8 @@ outputs:
 
   - name: pythermo
     version: {{ version }}
-    script: build_libthermo.sh                       # [unix]
-    script: build_libthermo.bat                      # [win]
+    script: build_libthermo.sh  # [unix]
+    script: build_libthermo.bat  # [win]
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -73,7 +73,7 @@ outputs:
 
 about:
   home: https://github.com/twiinIT/libthermo
-  summary: 'A fast C++/Python thermodynamical library'
+  summary: A fast C++/Python thermodynamical library
   description: |
     libthermo is a fast C++ thermodynamical library
     Python bindings are provided in pythermo.
