@@ -1,5 +1,5 @@
 {% set name = "libthermo" %}
-{% set version = "0.1.1" %}
+{% set version = "0.1.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,10 @@ package:
 
 source:
   url: https://github.com/twiinIT/libthermo/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 7c08b8c3a0190275cae6dc1605dbc5b681d176ab0066fb5b19d64630a0317861
-  patches:
-    - libthermo.patch
+  sha256: cb5455a9ea78e21ffc4725d51e8aacce370df3958aacb0fb7b4b391913b428d3
 
 build:
-  number: 3
+  number: 0
 
 outputs:
   - name: libthermo
@@ -25,6 +23,7 @@ outputs:
         - cmake
         - ninja
         - xtensor>=0.24
+        - boost
         - xsimd
         - tbb-devel
       host: []  # Empty host dependency section
@@ -59,6 +58,7 @@ outputs:
         - xtensor-python
         - xtensor
         - tbb-devel
+        - boost
         - pybind11
         - numpy>=1.20
       run:
