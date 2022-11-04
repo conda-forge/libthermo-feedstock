@@ -23,6 +23,7 @@ outputs:
         - cmake
         - ninja
         - xtensor>=0.24
+        - boost
         - xsimd
         - tbb-devel
       host: []  # Empty host dependency section
@@ -57,6 +58,7 @@ outputs:
         - xtensor-python
         - xtensor
         - tbb-devel
+        - boost
         - pybind11
         - numpy>=1.20
       run:
