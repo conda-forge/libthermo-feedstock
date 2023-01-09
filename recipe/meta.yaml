@@ -54,7 +54,7 @@ outputs:
         - pybind11-abi
         - pip
         - xtensor>=0.24
-        - xsimd=0.9
+        - xsimd=9.*
         - xtensor-python
         - xtensor
         - tbb-devel
