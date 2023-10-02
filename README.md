@@ -1,11 +1,11 @@
-About libthermo
-===============
+About libthermo-feedstock
+=========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/libthermo-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/twiinIT/libthermo
 
 Package license: BSD-3-Clause
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/libthermo-feedstock/blob/main/LICENSE.txt)
 
 Summary: A fast C++/Python thermodynamical library
 
