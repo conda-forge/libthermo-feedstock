@@ -1,5 +1,5 @@
 {% set name = "libthermo" %}
-{% set version = "0.2.0" %}
+{% set version = "0.3.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/twiinIT/libthermo/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 5c30c9103d70fa12fdf5dc900f6b787f5f28d0dfc9ee95eef298d26b0cf0e0dd
+  sha256: 2658985144371d7bb56dc21eba1275845ca820094a02ffe716bc632e468c31f9
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - name: libthermo
@@ -53,7 +53,7 @@ outputs:
         - python
         - pybind11-abi
         - pip
-        - xtensor>=0.24
+        - xtensor>=0.24,<0.24.6
         - xsimd=9.*
         - xtensor-python
         - xtensor
