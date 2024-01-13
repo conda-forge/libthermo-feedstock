@@ -1,5 +1,5 @@
 {% set name = "libthermo" %}
-{% set version = "0.3.0" %}
+{% set version = "0.3.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/twiinIT/libthermo/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 2658985144371d7bb56dc21eba1275845ca820094a02ffe716bc632e468c31f9
+  sha256: 5cf2b2eb3922150bc07b7f1ac36e7422420c797fea13e77887b090de242bbf07
 
 build:
   number: 0
