@@ -15,8 +15,8 @@ build:
 outputs:
   - name: libthermo
     version: {{ version }}
-    script: build_libthermo.sh                       # [unix]
-    script: build_libthermo.bat                      # [win]
+    script: build_libthermo.sh  # [unix]
+    script: build_libthermo.bat  # [win]
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -42,8 +42,8 @@ outputs:
 
   - name: pythermo
     version: {{ version }}
-    script: build_libthermo.sh                       # [unix]
-    script: build_libthermo.bat                      # [win]
+    script: build_libthermo.sh  # [unix]
+    script: build_libthermo.bat  # [win]
     requirements:
       build:
         - {{ compiler('cxx') }}
