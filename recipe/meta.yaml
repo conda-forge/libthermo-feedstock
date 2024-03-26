@@ -10,7 +10,7 @@ source:
   sha256: 5cf2b2eb3922150bc07b7f1ac36e7422420c797fea13e77887b090de242bbf07
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: libthermo
@@ -20,6 +20,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('cxx') }}
+        - {{ stdlib("c") }}
         - cmake
         - ninja
         - xtensor>=0.24
@@ -47,6 +48,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('cxx') }}
+        - {{ stdlib("c") }}
         - cmake
         - ninja
       host:
