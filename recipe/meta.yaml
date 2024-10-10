@@ -55,6 +55,7 @@ outputs:
         - python
         - pybind11-abi
         - pip
+        - setuptools
         - xtensor>=0.24,<0.24.6
         - xsimd=9.*
         - xtensor-python
