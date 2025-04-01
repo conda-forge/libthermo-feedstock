@@ -2,26 +2,17 @@ rm -rf build
 mkdir build
 cd build
 
-if [[ $build_platform == "osx-64" ]]; then
-    export TBB_SWITCH=OFF
-else
-    export TBB_SWITCH=ON
-fi
 if [[ $PKG_NAME == "libthermo" ]]; then
     cmake .. ${CMAKE_ARGS}              \
         -GNinja                         \
         -DCMAKE_BUILD_TYPE="Release"    \
-        -DLIBTHERMO_USE_XTENSOR=ON      \
-        -DXTENSOR_USE_XSIMD=ON          \
-        -DXTENSOR_USE_TBB=ON
+        -DLIBTHERMO_USE_XTENSOR=OFF
 elif [[ $PKG_NAME == "pythermo" ]]; then
     cmake .. ${CMAKE_ARGS}              \
         -GNinja                         \
         -DCMAKE_BUILD_TYPE="Release"    \
         -DPython_EXECUTABLE=$PYTHON     \
-        -DLIBTHERMO_USE_XTENSOR=ON      \
-        -DXTENSOR_USE_XSIMD=ON          \
-        -DXTENSOR_USE_TBB=$TBB_SWITCH   \
+        -DLIBTHERMO_USE_XTENSOR=OFF     \
         -DBUILD_PY=ON
 fi
 
