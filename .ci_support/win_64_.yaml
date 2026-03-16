@@ -5,21 +5,23 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2019
+- vs2022
 libboost_python_devel:
-- '1.84'
+- '1.86'
+numpy:
+- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 pybind11_abi:
-- '4'
+- '11'
 python:
 - 3.10.* *_cpython
 - 3.11.* *_cpython
-- 3.8.* *_cpython
-- 3.9.* *_cpython
+- 3.12.* *_cpython
+- 3.13.* *_cp313
 target_platform:
 - win-64
 tbb_devel:
-- '2021'
+- '2022'
