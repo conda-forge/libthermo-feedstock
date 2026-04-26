@@ -10,7 +10,7 @@ source:
   sha256: 5cf2b2eb3922150bc07b7f1ac36e7422420c797fea13e77887b090de242bbf07
 
 build:
-  number: 1
+  number: 2
 
 outputs:
   - name: libthermo
