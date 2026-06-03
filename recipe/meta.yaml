@@ -1,80 +1,58 @@
-{% set name = "libthermo" %}
-{% set version = "0.3.1" %}
+context:
+  name: libthermo
+  version: 0.4.0
+  python_min: "3.12"
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: libthermo
+
+recipe:
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  url: https://github.com/twiinIT/libthermo/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 5cf2b2eb3922150bc07b7f1ac36e7422420c797fea13e77887b090de242bbf07
+  url: https://github.com/twiinIT/libthermo/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 01388272ae03ecd295c083be012543a9a82b7a22db2dec5a5dc898ccb486771c
 
 build:
-  number: 1
+  number: 0
 
 outputs:
-  - name: libthermo
-    version: {{ version }}
-    script: build_libthermo.sh                       # [unix]
-    script: build_libthermo.bat                      # [win]
+  - package:
+      name: libthermo
+    build:
+      script:
+        file: build
     requirements:
       build:
-        - {{ compiler('cxx') }}
-        - {{ stdlib("c") }}
+        - ${{ compiler('cxx') }}
         - cmake
         - ninja
-        - xtensor>=0.24
-        - libboost-python-devel
-        - xsimd=9.*
-        - tbb-devel
-      host: []  # Empty host dependency section
+        - libboost-devel
+      host: []
 
-    test:
-      commands:
-        - test -d ${PREFIX}/include/libthermo  # [unix]
-        - test -f ${PREFIX}/include/libthermo/version.hpp  # [unix]
-        - test -f ${PREFIX}/lib/cmake/libthermo/libthermoConfig.cmake  # [unix]
-        - if not exist %LIBRARY_PREFIX%\include\libthermo\version.hpp (exit 1)  # [win]
-        - if not exist %LIBRARY_PREFIX%\lib\cmake\libthermo\libthermoConfig.cmake (exit 1)  # [win]
-        {% set version_split = version.split('.') %}
-        - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_MAJOR {{ version_split[0] }}"  # [unix]
-        - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_MINOR {{ version_split[1] }}"  # [unix]
-        - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_PATCH {{ version_split[2] }}"  # [unix]
 
-  - name: pythermo
-    version: {{ version }}
-    script: build_libthermo.sh                       # [unix]
-    script: build_libthermo.bat                      # [win]
+  - package:
+      name: pythermo
+    build:
+      script: python -m pip install . --no-deps --ignore-installed --no-build-isolation --no-cache-dir -vvv
     requirements:
       build:
-        - {{ compiler('cxx') }}
-        - {{ stdlib("c") }}
+        - ${{ compiler('cxx') }}
         - cmake
         - ninja
+        - scikit-build-core
+        - libthermo
+        - libboost-devel
       host:
+        - python-abi3
         - python
-        - pybind11-abi
         - pip
-        - xtensor>=0.24,<0.24.6
-        - xsimd=9.*
-        - xtensor-python
-        - xtensor
-        - tbb-devel
-        - libboost-python-devel
-        - pybind11
-        - numpy>=1.20
-      run:
-        - xtensor-python
-        - numpy
-
-    test:
-      imports:
-        - pythermo.pythermo_core
-      commands:
-        - python -c "import pythermo._version; assert pythermo._version.__version__ == '{{ version }}'"
+        - nanobind
 
 about:
-  home: https://github.com/twiinIT/libthermo
+  homepage: https://github.com/twiinIT/libthermo
+  repository: https://github.com/twiinIT/libthermo
   summary: 'A fast C++/Python thermodynamical library'
   description: |
     libthermo is a fast C++ thermodynamical library
@@ -82,7 +60,6 @@ about:
   license: BSD-3-Clause
   license_file: LICENSE
   license_family: BSD
-  dev_url: https://github.com/twiinIT/libthermo
 
 extra:
   recipe-maintainers:
