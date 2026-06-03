@@ -1,5 +1,5 @@
 {% set name = "libthermo" %}
-{% set version = "0.3.1" %}
+{% set version = "0.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,16 +7,16 @@ package:
 
 source:
   url: https://github.com/twiinIT/libthermo/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 5cf2b2eb3922150bc07b7f1ac36e7422420c797fea13e77887b090de242bbf07
+  sha256: 01388272ae03ecd295c083be012543a9a82b7a22db2dec5a5dc898ccb486771c
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - name: libthermo
     version: {{ version }}
-    script: build_libthermo.sh                       # [unix]
-    script: build_libthermo.bat                      # [win]
+    script: build_libthermo.sh  # [unix]
+    script: build_libthermo.bat  # [win]
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -43,8 +43,8 @@ outputs:
 
   - name: pythermo
     version: {{ version }}
-    script: build_libthermo.sh                       # [unix]
-    script: build_libthermo.bat                      # [win]
+    script: build_libthermo.sh  # [unix]
+    script: build_libthermo.bat  # [win]
     requirements:
       build:
         - {{ compiler('cxx') }}
