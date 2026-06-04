@@ -36,9 +36,14 @@ outputs:
           include:
             exists:
               - libthermo/version.hpp
-          files:
-            exists:
-              - lib/cmake/libthermo/libthermoConfig.cmake 
+      - script:
+        - if: unix
+          then:
+          - test -f ${PREFIX}/lib/cmake/libthermo/libthermoConfig.cmake
+        - if: win
+          then:
+          -  if not exist %LIBRARY_PREFIX%\lib/cmake/libthermo/libthermoConfig.cmake (exit 1)
+
       # - script:
       #   - if: unix
       #     then:
