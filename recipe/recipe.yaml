@@ -1,0 +1,98 @@
+context:
+  name: libthermo
+  version: "0.4.0"
+  python_min: "3.12"
+  # major_version: "${{ version.split('.')[0] }}"
+  # minor_version: ${{ version.split('.')[1] }}
+  # patch_version: ${{ version.split('.')[2] }}
+
+recipe:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/twiinIT/libthermo/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 01388272ae03ecd295c083be012543a9a82b7a22db2dec5a5dc898ccb486771c
+
+build:
+  number: 0
+  skip: ["osx"]
+
+outputs:
+  - package:
+      name: libthermo
+    build:
+      script:
+        file: build
+    requirements:
+      build:
+        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - cmake
+        - ninja
+        - libboost-devel
+      host: []
+    tests:
+      - package_contents:
+          include:
+            exists:
+              - libthermo/version.hpp
+      - script:
+        - if: unix
+          then:
+          - test -f ${PREFIX}/lib/cmake/libthermo/libthermoConfig.cmake
+        - if: win
+          then:
+          -  if not exist %LIBRARY_PREFIX%\lib/cmake/libthermo/libthermoConfig.cmake (exit 1)
+
+      # - script:
+      #   - if: unix
+      #     then:
+      #     - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_MAJOR ${{ major_version }}"
+      #     - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_MINOR ${{ minor_version }}"
+      #     - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_PATCH ${{ patch_version }}"
+
+  - package:
+      name: pythermo
+    build:
+      script: python -m pip install ./pythermo --no-deps --ignore-installed --no-build-isolation --no-cache-dir -vvv
+    requirements:
+      build:
+        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - cmake
+        - ninja
+        - libthermo
+        - libboost-devel
+      host:
+        - python-abi3
+        - python>=3.12
+        - pip
+        - nanobind
+        - scikit-build-core
+      run:
+        - python>=3.12
+    tests:
+      - python:
+          imports:
+            - pythermo.pythermo_core
+      - script:
+            interpreter: python
+            content: |
+              import pythermo._version
+              assert pythermo._version.__version__ == '${{ version }}'
+
+about:
+  homepage: https://github.com/twiinIT/libthermo
+  repository: https://github.com/twiinIT/libthermo
+  summary: 'A fast C++/Python thermodynamical library'
+  description: |
+    libthermo is a fast C++ thermodynamical library
+    Python bindings are provided in pythermo.
+  license: BSD-3-Clause
+  license_file: LICENSE
+  license_family: BSD
+
+extra:
+  recipe-maintainers:
+    - adriendelsalle
