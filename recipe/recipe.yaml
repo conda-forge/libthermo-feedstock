@@ -2,9 +2,6 @@ context:
   name: libthermo
   version: "0.4.0"
   python_min: "3.12"
-  # major_version: "${{ version.split('.')[0] }}"
-  # minor_version: ${{ version.split('.')[1] }}
-  # patch_version: ${{ version.split('.')[2] }}
 
 recipe:
   name: ${{ name|lower }}
@@ -15,7 +12,7 @@ source:
   sha256: 01388272ae03ecd295c083be012543a9a82b7a22db2dec5a5dc898ccb486771c
 
 build:
-  number: 0
+  number: 1
   skip: ["osx"]
 
 outputs:
@@ -45,13 +42,6 @@ outputs:
           then:
           -  if not exist %LIBRARY_PREFIX%\lib/cmake/libthermo/libthermoConfig.cmake (exit 1)
 
-      # - script:
-      #   - if: unix
-      #     then:
-      #     - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_MAJOR ${{ major_version }}"
-      #     - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_MINOR ${{ minor_version }}"
-      #     - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_PATCH ${{ patch_version }}"
-
   - package:
       name: pythermo
     build:
@@ -65,13 +55,12 @@ outputs:
         - libthermo
         - libboost-devel
       host:
-        - python-abi3
-        - python>=3.12
+        - python=${{ python_min }}
         - pip
         - nanobind
         - scikit-build-core
       run:
-        - python>=3.12
+        - python>=${{ python_min }}
     tests:
       - python:
           imports:
