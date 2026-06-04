@@ -54,7 +54,7 @@ outputs:
   - package:
       name: pythermo
     build:
-      script: python -m pip install . --no-deps --ignore-installed --no-build-isolation --no-cache-dir -vvv
+      script: python -m pip install ./pythermo --no-deps --ignore-installed --no-build-isolation --no-cache-dir -vvv
     requirements:
       build:
         - ${{ compiler('cxx') }}
