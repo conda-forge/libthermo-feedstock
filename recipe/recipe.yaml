@@ -66,10 +66,12 @@ outputs:
         - libboost-devel
       host:
         - python-abi3
-        - python
+        - python>=3.12
         - pip
         - nanobind
         - scikit-build-core
+      run:
+        - python>=3.12
     tests:
       - python:
           imports:
