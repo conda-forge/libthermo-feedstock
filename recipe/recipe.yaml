@@ -1,7 +1,10 @@
 context:
   name: libthermo
-  version: 0.4.0
+  version: "0.4.0"
   python_min: "3.12"
+  # major_version: "${{ version.split('.')[0] }}"
+  # minor_version: ${{ version.split('.')[1] }}
+  # patch_version: ${{ version.split('.')[2] }}
 
 recipe:
   name: ${{ name|lower }}
@@ -23,11 +26,25 @@ outputs:
     requirements:
       build:
         - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
         - cmake
         - ninja
         - libboost-devel
       host: []
-
+    tests:
+      - package_contents:
+          include:
+            exists:
+              - libthermo/version.hpp
+          files:
+            exists:
+              - /lib/cmake/libthermo/libthermoConfig.cmake 
+      # - script:
+      #   - if: unix
+      #     then:
+      #     - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_MAJOR ${{ major_version }}"
+      #     - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_MINOR ${{ minor_version }}"
+      #     - cat $PREFIX/include/libthermo/version.hpp | grep "LIBTHERMO_VERSION_PATCH ${{ patch_version }}"
 
   - package:
       name: pythermo
@@ -36,9 +53,9 @@ outputs:
     requirements:
       build:
         - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
         - cmake
         - ninja
-        - scikit-build-core
         - libthermo
         - libboost-devel
       host:
@@ -46,6 +63,16 @@ outputs:
         - python
         - pip
         - nanobind
+        - scikit-build-core
+    tests:
+      - python:
+          imports:
+            - pythermo.pythermo_core
+      - script:
+            interpreter: python
+            content: |
+              import pythermo._version
+              assert pythermo._version.__version__ == '{{ version }}'
 
 about:
   homepage: https://github.com/twiinIT/libthermo
