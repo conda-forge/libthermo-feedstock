@@ -1,7 +1,7 @@
 context:
   name: libthermo
   version: "0.4.0"
-  python_min: "3.12"
+  python_min: 3.12
 
 recipe:
   name: ${{ name|lower }}
@@ -45,6 +45,8 @@ outputs:
   - package:
       name: pythermo
     build:
+      python:
+        version_independent: true
       script: python -m pip install ./pythermo --no-deps --ignore-installed --no-build-isolation --no-cache-dir -vvv
     requirements:
       build:
