@@ -38,7 +38,7 @@ outputs:
               - libthermo/version.hpp
           files:
             exists:
-              - /lib/cmake/libthermo/libthermoConfig.cmake 
+              - lib/cmake/libthermo/libthermoConfig.cmake 
       # - script:
       #   - if: unix
       #     then:
