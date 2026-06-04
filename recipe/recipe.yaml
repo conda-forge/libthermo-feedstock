@@ -80,7 +80,7 @@ outputs:
             interpreter: python
             content: |
               import pythermo._version
-              assert pythermo._version.__version__ == '{{ version }}'
+              assert pythermo._version.__version__ == '${{ version }}'
 
 about:
   homepage: https://github.com/twiinIT/libthermo
