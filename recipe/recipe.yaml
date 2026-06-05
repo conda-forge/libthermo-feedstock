@@ -52,12 +52,13 @@ outputs:
         - ${{ stdlib("c") }}
         - cmake
         - ninja
-        - libthermo
       host:
         - python
         - pip
         - nanobind
         - scikit-build-core
+        - libboost-devel
+        - libthermo
       run:
         - python
     tests:
