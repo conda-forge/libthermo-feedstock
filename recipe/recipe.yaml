@@ -1,7 +1,7 @@
 context:
   name: libthermo
-  version: "0.4.0"
-  python_min: "3.12"
+  version: "0.4.1"
+  python_min: "3.11"
 
 recipe:
   name: ${{ name|lower }}
@@ -9,10 +9,10 @@ recipe:
 
 source:
   url: https://github.com/twiinIT/libthermo/archive/refs/tags/${{ version }}.tar.gz
-  sha256: 01388272ae03ecd295c083be012543a9a82b7a22db2dec5a5dc898ccb486771c
+  sha256: d3f0e43191b5a7a48cc656c2ceee773cba7b31567420c5b799f7b51d8681977a
 
 build:
-  number: 2
+  number: 0
   skip: ["osx"]
 
 outputs:
@@ -45,8 +45,6 @@ outputs:
   - package:
       name: pythermo
     build:
-      python:
-        version_independent: true
       script: python -m pip install ./pythermo --no-deps --ignore-installed --no-build-isolation --no-cache-dir -vvv
     requirements:
       build:
@@ -55,14 +53,13 @@ outputs:
         - cmake
         - ninja
         - libthermo
-        - libboost-devel
       host:
-        - python=${{ python_min }}
+        - python
         - pip
         - nanobind
         - scikit-build-core
       run:
-        - python>=${{ python_min }}
+        - python
     tests:
       - python:
           imports:
