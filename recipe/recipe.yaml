@@ -9,7 +9,7 @@ recipe:
 
 source:
   url: https://github.com/twiinIT/libthermo/archive/refs/tags/${{ version }}.tar.gz
-  sha256: d3f0e43191b5a7a48cc656c2ceee773cba7b31567420c5b799f7b51d8681977a
+  sha256: 546a076359b11959f6ac80844ec558c7403241bfa9f4e3be23cbbbc146ad5c2e
 
 build:
   number: 0
